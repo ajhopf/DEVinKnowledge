@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEVInKnowledge &middot; Base do Conhecimento</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/images/favicon.ico"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>DEVInKnowledge</h1>
+    </header>
+    <section class="form">
+      <form>
+        <div>
+          <label for="title">Título</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Título"
+            required
+            minlength="8"
+            maxlength="64"
+            autofocus
+          />
+        </div>
+
+        <div>
+          <label for="skill">Linguagem/Skill</label>
+          <input
+            type="text"
+            name="skill"
+            id="skill"
+            placeholder="Linguagem/Skill"
+            required
+            minlength="2"
+            maxlength="16"
+          />
+        </div>
+
+        <div>
+          <label for="category">Categoria</label>
+          <select name="category" id="category" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option value="0">FrontEnd</option>
+            <option value="1">BackEnd</option>
+            <option value="2">FullStack</option>
+            <option value="3">Comportamental / Soft</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="description">Descrição</label>
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+            minlength="16"
+            maxlength="512"
+            placeholder="Descrição da dica..."
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="video">Vídeo do Youtube</label>
+          <input type="url" name="video" id="video" />
+        </div>
+
+        <button type="reset">Limpar</button>
+        <button type="submit">Salvar</button>
+      </form>
+    </section>
+
+    <section class="statistics">
+      <div>
+        <h2>Total</h2>
+        <p>0</p>
+      </div>
+      <div>
+        <h2>FrontEnd</h2>
+        <p>0</p>
+      </div>
+      <div>
+        <h2>BackEnd</h2>
+        <p>0</p>
+      </div>
+      <div>
+        <h2>FullStack</h2>
+        <p>0</p>
+      </div>
+      <div>
+        <h2>SoftSkill</h2>
+        <p>0</p>
+      </div>
+    </section>
+
+    <div>
+      <input type="text" placeholder="Digite um título para buscar" />
+      <img src="./assets/images/search-icon.png" alt="Search" />
+      <img src="./assets/images/cancel-icon.png" alt="Cancel Search" />
+    </div>
+  </body>
+</html>
