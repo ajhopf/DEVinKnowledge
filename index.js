@@ -43,8 +43,10 @@ const createHintLi = hint => {
   const editButton = document.createElement('button');
 
   title.innerText = hint.title;
-  language.innerText = hint.language;
-  category.innerText = transformCategoryValue(hint.category);
+  language.innerHTML = `<span>Linguagem/Skill:</span> ${hint.language}`;
+  category.innerHTML = `<span>Categoria:</span> ${transformCategoryValue(
+    hint.category
+  )}`;
   description.innerText = hint.description;
   videoUrl.innerText = hint.videoUrl;
 
@@ -63,6 +65,9 @@ const createHintLi = hint => {
   editButton.innerText = 'Editar';
   editButton.addEventListener('click', event => {
     editHint(hint);
+    alert(
+      'As informações da dica selecionada para edição foram enviadas para o formulário. Realize as devidas edições e clique em Salvar para finalizar.'
+    );
   });
 
   li.appendChild(title);
@@ -153,9 +158,14 @@ const submitForm = async event => {
   };
 
   if (code) {
-    updateHint(post);
+    let confirmUpdate = confirm(
+      `Você está editando a dica com título ${post.title}. Você confirma a edição?`
+    );
+
+    confirmUpdate && updateHint(post);
   } else {
     createHint(post);
+    alert('Dica cadastrada com sucesso!');
   }
 };
 
@@ -191,9 +201,11 @@ searchButton.addEventListener('click', () => {
   }
 });
 
-resetSearch.addEventListener('click', () => {
+resetSearch.addEventListener('click', async () => {
   const input = document.querySelector('#search-input');
   input.value = '';
+  const hints = await getHints();
+  populateHints(hints);
 });
 
 statisticsDivs.forEach((div, index) => {

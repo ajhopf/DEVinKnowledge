@@ -31,6 +31,14 @@
       "description": "MERN significa MongoDB, Express, React e Node;\n\nMongoDB: banco de dados não relacional, ideal para aplicações web, pois, faz query’s e retornos utilizando JSON.\nExpress: framework utilizado no backend que facilita a criação de API’s REST, gerenciando rotas e requisições.\nReact: framework utilizado no frontend, criado e utilizado pelo Facebook, o React torna a criação do front muito mais produtiva.\nNode.js: ambiente de execução de códigos Javascript mais conhecido no mercado.",
       "videoUrl": "https://www.youtube.com/watch?v=CvCiNeLnZ00",
       "id": 7
+    },
+    {
+      "title": "exemplo22 javascript",
+      "language": "comportamento",
+      "category": "4",
+      "description": "deajedapohdjeandeapoi ha h oiehae oinh oieh apjk ed´pohejad iheaiope ale a",
+      "videoUrl": "",
+      "id": 8
     }
   ]
 }
