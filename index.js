@@ -33,22 +33,37 @@ const transformCategoryValue = value => {
 };
 
 const createHintLi = hint => {
+  console.log(hint);
+
   const li = document.createElement('li');
   const title = document.createElement('h3');
   const language = document.createElement('h4');
   const category = document.createElement('h4');
   const description = document.createElement('p');
-  const videoUrl = document.createElement('a');
+  //buttons
+  const buttonsDiv = document.createElement('div');
   const deleteButton = document.createElement('button');
   const editButton = document.createElement('button');
 
+  //textos
   title.innerText = hint.title;
   language.innerHTML = `<span>Linguagem/Skill:</span> ${hint.language}`;
   category.innerHTML = `<span>Categoria:</span> ${transformCategoryValue(
     hint.category
   )}`;
   description.innerText = hint.description;
-  videoUrl.innerText = hint.videoUrl;
+
+  //buttons
+  buttonsDiv.classList.add('hint-buttons');
+
+  //videoButton
+  if (hint.videoUrl) {
+    const videoButton = document.createElement('a');
+    videoButton.innerText = 'Vídeo';
+    videoButton.href = hint.videoUrl;
+    videoButton.setAttribute('target', '_blank');
+    buttonsDiv.appendChild(videoButton);
+  }
 
   //delete Button
   deleteButton.innerText = 'Deletar';
@@ -74,9 +89,10 @@ const createHintLi = hint => {
   li.appendChild(language);
   li.appendChild(category);
   li.appendChild(description);
-  li.appendChild(videoUrl);
-  li.appendChild(deleteButton);
-  li.appendChild(editButton);
+
+  buttonsDiv.appendChild(deleteButton);
+  buttonsDiv.appendChild(editButton);
+  li.appendChild(buttonsDiv);
 
   hintsList.appendChild(li);
 };

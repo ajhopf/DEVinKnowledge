@@ -7,12 +7,13 @@ body, body * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   display: flex;
   min-height: 100vh;
- 
+  
 }
 
 .left-div {
@@ -176,13 +177,26 @@ header{
   position: relative;
 }
 
-.hints-list li button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 1rem;
+.hints-list h3 {
+  text-align: center;
 }
 
-.hints-list li button:last-child{
-  margin-right: 4rem;
+.hints-list h4  {
+  font-weight: normal;
+}
+
+.hints-list li > * {
+  margin: 0.5rem;
+}
+
+.hints-list h4 span {
+  font-weight: bold;
+}
+
+.hint-buttons {
+  text-align: right;
+}
+
+.hint-buttons > * {
+  margin: 0 0.125rem;
 }
