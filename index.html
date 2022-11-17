@@ -10,101 +10,117 @@
       href="./assets/images/favicon.ico"
       type="image/x-icon"
     />
+    <script src="index.js" type="module" async></script>
+    <link rel="stylesheet" href="./assets/styles/style.css" />
   </head>
   <body>
-    <header>
-      <h1>DEVInKnowledge</h1>
-    </header>
-    <section class="form">
-      <form>
+    <div class="left-div">
+      <header>
+        <h1>DEVInKnowledge</h1>
+      </header>
+      <section class="form-wrapper">
+        <form id="form">
+          <div>
+            <label for="code">Código</label>
+            <input id="code" readonly />
+          </div>
+          <div>
+            <label for="title">Título</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Título"
+              required
+              minlength="8"
+              maxlength="64"
+              autofocus
+            />
+          </div>
+
+          <div>
+            <label for="skill">Linguagem/Skill</label>
+            <input
+              type="text"
+              name="skill"
+              id="skill"
+              placeholder="Linguagem/Skill"
+              required
+              minlength="2"
+              maxlength="16"
+            />
+          </div>
+
+          <div>
+            <label for="category">Categoria</label>
+            <select name="category" id="category" required>
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="1">FrontEnd</option>
+              <option value="2">BackEnd</option>
+              <option value="3">FullStack</option>
+              <option value="4">Comportamental / Soft</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="description">Descrição</label>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+              minlength="16"
+              maxlength="512"
+              placeholder="Descrição da dica..."
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="video">Vídeo do Youtube</label>
+            <input type="url" name="video" id="video" />
+          </div>
+
+          <div>
+            <button type="reset">Limpar</button>
+            <button type="submit">Salvar</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="right-div">
+      <section class="statistics">
         <div>
-          <label for="title">Título</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Título"
-            required
-            minlength="8"
-            maxlength="64"
-            autofocus
-          />
+          <h2>Total</h2>
+          <p id="total">0</p>
         </div>
-
         <div>
-          <label for="skill">Linguagem/Skill</label>
-          <input
-            type="text"
-            name="skill"
-            id="skill"
-            placeholder="Linguagem/Skill"
-            required
-            minlength="2"
-            maxlength="16"
-          />
+          <h2>FrontEnd</h2>
+          <p id="frontend">0</p>
         </div>
-
         <div>
-          <label for="category">Categoria</label>
-          <select name="category" id="category" required>
-            <option value="" disabled selected>Selecione uma opção</option>
-            <option value="0">FrontEnd</option>
-            <option value="1">BackEnd</option>
-            <option value="2">FullStack</option>
-            <option value="3">Comportamental / Soft</option>
-          </select>
+          <h2>BackEnd</h2>
+          <p id="backend">0</p>
         </div>
-
         <div>
-          <label for="description">Descrição</label>
-          <textarea
-            name="description"
-            id="description"
-            cols="30"
-            rows="10"
-            minlength="16"
-            maxlength="512"
-            placeholder="Descrição da dica..."
-          ></textarea>
+          <h2>FullStack</h2>
+          <p id="fullstack">0</p>
         </div>
-
         <div>
-          <label for="video">Vídeo do Youtube</label>
-          <input type="url" name="video" id="video" />
+          <h2>SoftSkill</h2>
+          <p id="soft">0</p>
         </div>
+      </section>
 
-        <button type="reset">Limpar</button>
-        <button type="submit">Salvar</button>
-      </form>
-    </section>
+      <div class="search-bar">
+        <input type="text" placeholder="Digite um título para buscar" />
+        <img src="./assets/images/search-icon.png" alt="Search" />
+        <img src="./assets/images/cancel-icon.png" alt="Cancel Search" />
+      </div>
 
-    <section class="statistics">
-      <div>
-        <h2>Total</h2>
-        <p>0</p>
-      </div>
-      <div>
-        <h2>FrontEnd</h2>
-        <p>0</p>
-      </div>
-      <div>
-        <h2>BackEnd</h2>
-        <p>0</p>
-      </div>
-      <div>
-        <h2>FullStack</h2>
-        <p>0</p>
-      </div>
-      <div>
-        <h2>SoftSkill</h2>
-        <p>0</p>
-      </div>
-    </section>
-
-    <div>
-      <input type="text" placeholder="Digite um título para buscar" />
-      <img src="./assets/images/search-icon.png" alt="Search" />
-      <img src="./assets/images/cancel-icon.png" alt="Cancel Search" />
+      <section class="hints-wrapper">
+        <ul class="hints-list"></ul>
+      </section>
     </div>
   </body>
 </html>

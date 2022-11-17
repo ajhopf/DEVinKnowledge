@@ -1,0 +1,20 @@
+{
+  "hints": [
+    {
+      "title": "JavaScript Assincrono",
+      "language": "JavaScript",
+      "category": "1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed purus tellus, eleifend sit amet eleifend quis, dignissim quis ex. Aenean et dolor a sapien tincidunt dictum non non lorem. Etiam enim nisi, lacinia a ipsum quis, sollicitudin varius eros. Quisque scelerisque pharetra facilisis. Nulla mollis varius ligula, et condimentum turpis dapibus et. Aenean est nulla, commodo et est in, blandit euismod velit. Quisque efficitur tortor lectus, at ultrices dui blandit id. Suspendisse mattis rhoncus sem, et eleme",
+      "videoUrl": "",
+      "id": 4
+    },
+    {
+      "title": "Principais Seletores de Elementos",
+      "language": "JavaScript",
+      "category": "1",
+      "description": "Alguns dos principais seletores de elementos:\n\n* document.getElementById(id);\n* document.getElementsByClassName(className);\n* document.getElementsByTagName(tagName);\n* document.querySelector(seletorCSS);\n* document.querySelectorAll(seletorCSS);\n",
+      "videoUrl": "",
+      "id": 5
+    }
+  ]
+}

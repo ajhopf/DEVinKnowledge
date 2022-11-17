@@ -1,0 +1,24 @@
+{
+  "name": "devinknowledge",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch data/db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajhopf/DEVinKnowledge.git"
+  },
+  "author": "André Hopf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajhopf/DEVinKnowledge/issues"
+  },
+  "homepage": "https://github.com/ajhopf/DEVinKnowledge#readme",
+  "dependencies": {
+    "json-server": "^0.17.1"
+  }
+}
