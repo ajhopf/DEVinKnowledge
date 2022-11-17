@@ -33,8 +33,6 @@ const transformCategoryValue = value => {
 };
 
 const createHintLi = hint => {
-  console.log(hint);
-
   const li = document.createElement('li');
   const title = document.createElement('h3');
   const language = document.createElement('h4');
@@ -67,14 +65,7 @@ const createHintLi = hint => {
 
   //delete Button
   deleteButton.innerText = 'Deletar';
-  deleteButton.addEventListener('click', event => {
-    let confirmDelete = confirm(
-      `Tem certeza de que deseja excluir a dica com título de ${title.innerText}?`
-    );
-    if (confirmDelete) {
-      deleteHint(hint.id);
-    }
-  });
+  deleteButton.addEventListener('click', () => deleteHintFromPage(hint));
 
   //edit Button
   editButton.innerText = 'Editar';
@@ -93,6 +84,7 @@ const createHintLi = hint => {
   buttonsDiv.appendChild(deleteButton);
   buttonsDiv.appendChild(editButton);
   li.appendChild(buttonsDiv);
+  li.setAttribute('data-id', hint.id);
 
   hintsList.appendChild(li);
 };
@@ -105,43 +97,30 @@ const populateHints = hints => {
   });
 };
 
+const updateHintCountByCategory = (hint, operation) => {
+  const totalHintsCount = document.querySelector('[data-category="0"]');
+  const categoryHintsCount = document.querySelector(
+    `[data-category="${hint.category}"]`
+  );
+
+  let totalNumber = parseInt(totalHintsCount.innerText);
+  let newCountByCategory = parseInt(categoryHintsCount.innerText);
+
+  if (!operation) {
+    newCountByCategory++;
+    totalNumber++;
+  } else {
+    newCountByCategory--;
+    totalNumber--;
+  }
+  totalHintsCount.innerText = totalNumber;
+  categoryHintsCount.innerText = newCountByCategory;
+};
+
 const getStatistics = hints => {
-  const total = document.querySelector('#total');
-  const frontend = document.querySelector('#frontend');
-  const backend = document.querySelector('#backend');
-  const fullstack = document.querySelector('#fullstack');
-  const soft = document.querySelector('#soft');
-
-  let totalValue = parseInt(total.innerText);
-  let frontendValue = parseInt(frontend.innerText);
-  let backendValue = parseInt(backend.innerText);
-  let fullstackValue = parseInt(fullstack.innerText);
-  let softValue = parseInt(soft.innerText);
-
   hints.forEach(hint => {
-    totalValue++;
-
-    switch (hint.category) {
-      case '1':
-        frontendValue++;
-        break;
-      case '2':
-        backendValue++;
-        break;
-      case '3':
-        fullstackValue++;
-        break;
-      default:
-        softValue++;
-        break;
-    }
+    updateHintCountByCategory(hint);
   });
-
-  total.innerText = totalValue;
-  frontend.innerText = frontendValue;
-  backend.innerText = backendValue;
-  fullstack.innerText = fullstackValue;
-  soft.innerText = softValue;
 };
 
 const editHint = hint => {
@@ -155,6 +134,22 @@ const editHint = hint => {
   category.selected = 'select';
   const description = document.querySelector('#description');
   description.value = hint.description;
+};
+
+const deleteHintFromPage = hint => {
+  let confirmDelete = confirm(
+    `Tem certeza de que deseja excluir a dica com título de ${title.innerText}?`
+  );
+  if (confirmDelete) {
+    deleteHint(hint.id);
+
+    const deletedHint = document.querySelector(
+      `[data-id="${hint.id.toString()}"]`
+    );
+    deletedHint.remove();
+
+    updateHintCountByCategory(hint, true);
+  }
 };
 
 const submitForm = async event => {
@@ -180,7 +175,9 @@ const submitForm = async event => {
 
     confirmUpdate && updateHint(post);
   } else {
-    createHint(post);
+    const createdHint = await createHint(post);
+    createHintLi(createdHint);
+    updateHintCountByCategory(createdHint);
     alert('Dica cadastrada com sucesso!');
   }
 };
