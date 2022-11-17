@@ -7,6 +7,9 @@ import {
 
 const form = document.querySelector('#form');
 const hintsList = document.querySelector('.hints-list');
+const statisticsDivs = document.querySelectorAll('.statistics div');
+const searchButton = document.querySelector('#search-button');
+const resetSearch = document.querySelector('#search-reset');
 
 const transformCategoryValue = value => {
   let text;
@@ -121,15 +124,13 @@ const getStatistics = hints => {
 };
 
 const editHint = hint => {
-  console.log(hint);
   const code = document.querySelector('#code');
   code.value = hint.id;
   const title = document.querySelector('#title');
   title.value = hint.title;
   const language = document.querySelector('#skill');
   language.value = hint.language;
-  const category =
-    document.querySelector('#category')[parseInt(hint.category) + 1];
+  const category = document.querySelector('#category')[parseInt(hint.category)];
   category.selected = 'select';
   const description = document.querySelector('#description');
   description.value = hint.description;
@@ -157,6 +158,54 @@ const submitForm = async event => {
     createHint(post);
   }
 };
+
+const filterHintsByCategory = (hints, filter) => {
+  hintsList.innerHTML = '';
+
+  const filteredHintList = hints.filter(
+    hint => parseInt(hint.category) === filter
+  );
+
+  filteredHintList.forEach(hint => {
+    createHintLi(hint);
+  });
+};
+
+const filterHintsByTitle = async title => {
+  hintsList.innerHTML = '';
+  const hints = await getHints();
+
+  const filteredHintList = hints.filter(hint => {
+    return hint.title.toLowerCase().includes(title.toLowerCase());
+  });
+  filteredHintList.forEach(hint => {
+    createHintLi(hint);
+  });
+};
+
+searchButton.addEventListener('click', () => {
+  const title = document.querySelector('#search-input').value;
+
+  if (title) {
+    filterHintsByTitle(title);
+  }
+});
+
+resetSearch.addEventListener('click', () => {
+  const input = document.querySelector('#search-input');
+  input.value = '';
+});
+
+statisticsDivs.forEach((div, index) => {
+  div.addEventListener('click', async () => {
+    const hints = await getHints();
+    if (index === 0) {
+      populateHints(hints);
+    } else {
+      filterHintsByCategory(hints, index);
+    }
+  });
+});
 
 form.addEventListener('submit', event => {
   submitForm(event);

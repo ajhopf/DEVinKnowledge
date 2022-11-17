@@ -12,9 +12,25 @@
       "title": "Principais Seletores de Elementos",
       "language": "JavaScript",
       "category": "1",
-      "description": "Alguns dos principais seletores de elementos:\n\n* document.getElementById(id);\n* document.getElementsByClassName(className);\n* document.getElementsByTagName(tagName);\n* document.querySelector(seletorCSS);\n* document.querySelectorAll(seletorCSS);\n",
+      "description": "\nAlguns dos principais seletores de elementos:\n\n* document.getElementById(id);\n* document.getElementsByClassName(className);\n* document.getElementsByTagName(tagName);\n* document.querySelector(seletorCSS);\n* document.querySelectorAll(seletorCSS);\n",
       "videoUrl": "",
       "id": 5
+    },
+    {
+      "title": "HTTP Verbs",
+      "language": "REST",
+      "category": "2",
+      "description": "### HTTP Verbs\n\nThere are 4 basic HTTP verbs we use in requests to interact with resources in a REST system:\n\n- GET — retrieve a specific resource (by id) or a collection of resources\n- POST — create a new resource\n- PUT — update a specific resource (by id)\n- DELETE — remove a specific resource by id",
+      "videoUrl": "",
+      "id": 6
+    },
+    {
+      "title": "MERN Stack",
+      "language": "full stack",
+      "category": "3",
+      "description": "MERN significa MongoDB, Express, React e Node;\n\nMongoDB: banco de dados não relacional, ideal para aplicações web, pois, faz query’s e retornos utilizando JSON.\nExpress: framework utilizado no backend que facilita a criação de API’s REST, gerenciando rotas e requisições.\nReact: framework utilizado no frontend, criado e utilizado pelo Facebook, o React torna a criação do front muito mais produtiva.\nNode.js: ambiente de execução de códigos Javascript mais conhecido no mercado.",
+      "videoUrl": "https://www.youtube.com/watch?v=CvCiNeLnZ00",
+      "id": 7
     }
   ]
 }

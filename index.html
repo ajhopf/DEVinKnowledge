@@ -21,8 +21,8 @@
       <section class="form-wrapper">
         <form id="form">
           <div>
-            <label for="code">Código</label>
-            <input id="code" readonly />
+            <label for="code" hidden>Código</label>
+            <input id="code" readonly hidden />
           </div>
           <div>
             <label for="title">Título</label>
@@ -113,9 +113,21 @@
       </section>
 
       <div class="search-bar">
-        <input type="text" placeholder="Digite um título para buscar" />
-        <img src="./assets/images/search-icon.png" alt="Search" />
-        <img src="./assets/images/cancel-icon.png" alt="Cancel Search" />
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Digite um título para buscar"
+        />
+        <img
+          id="search-button"
+          src="./assets/images/search-icon.png"
+          alt="Search"
+        />
+        <img
+          id="search-reset"
+          src="./assets/images/cancel-icon.png"
+          alt="Cancel Search"
+        />
       </div>
 
       <section class="hints-wrapper">
