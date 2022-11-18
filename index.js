@@ -40,6 +40,7 @@ const createHintLi = hint => {
   const description = document.createElement('p');
   //buttons
   const buttonsDiv = document.createElement('div');
+  const videoButton = document.createElement('a');
   const deleteButton = document.createElement('button');
   const editButton = document.createElement('button');
 
@@ -55,13 +56,14 @@ const createHintLi = hint => {
   buttonsDiv.classList.add('hint-buttons');
 
   //videoButton
+  videoButton.innerText = 'Vídeo';
   if (hint.videoUrl) {
-    const videoButton = document.createElement('a');
-    videoButton.innerText = 'Vídeo';
     videoButton.href = hint.videoUrl;
-    videoButton.setAttribute('target', '_blank');
-    buttonsDiv.appendChild(videoButton);
+  } else {
+    videoButton.setAttribute('hidden', 'hidden');
   }
+
+  videoButton.setAttribute('target', '_blank');
 
   //delete Button
   deleteButton.innerText = 'Deletar';
@@ -70,7 +72,7 @@ const createHintLi = hint => {
   //edit Button
   editButton.innerText = 'Editar';
   editButton.addEventListener('click', event => {
-    editHint(hint);
+    sendHintToFormToEdit(hint);
     alert(
       'As informações da dica selecionada para edição foram enviadas para o formulário. Realize as devidas edições e clique em Salvar para finalizar.'
     );
@@ -81,10 +83,12 @@ const createHintLi = hint => {
   li.appendChild(category);
   li.appendChild(description);
 
+  buttonsDiv.appendChild(videoButton);
   buttonsDiv.appendChild(deleteButton);
   buttonsDiv.appendChild(editButton);
   li.appendChild(buttonsDiv);
   li.setAttribute('data-id', hint.id);
+  li.setAttribute('data-hint-category', hint.category);
 
   hintsList.appendChild(li);
 };
@@ -97,14 +101,14 @@ const populateHints = hints => {
   });
 };
 
-const updateHintCountByCategory = (hint, operation) => {
+const updateHintCountByCategory = (hintCategory, operation) => {
   const totalHintsCount = document.querySelector('[data-category="0"]');
-  const categoryHintsCount = document.querySelector(
-    `[data-category="${hint.category}"]`
+  const countByHintsCategory = document.querySelector(
+    `[data-category="${hintCategory}"]`
   );
 
   let totalNumber = parseInt(totalHintsCount.innerText);
-  let newCountByCategory = parseInt(categoryHintsCount.innerText);
+  let newCountByCategory = parseInt(countByHintsCategory.innerText);
 
   if (!operation) {
     newCountByCategory++;
@@ -114,16 +118,21 @@ const updateHintCountByCategory = (hint, operation) => {
     totalNumber--;
   }
   totalHintsCount.innerText = totalNumber;
-  categoryHintsCount.innerText = newCountByCategory;
+  countByHintsCategory.innerText = newCountByCategory;
 };
 
-const getStatistics = hints => {
-  hints.forEach(hint => {
-    updateHintCountByCategory(hint);
+const getStatistics = () => {
+  const allStatistics = document.querySelectorAll('[data-category]');
+  const allHints = document.querySelectorAll('[data-hint-category]');
+
+  allStatistics.forEach(statistic => (statistic.innerText = '0'));
+
+  allHints.forEach(hint => {
+    updateHintCountByCategory(hint.dataset.hintCategory);
   });
 };
 
-const editHint = hint => {
+const sendHintToFormToEdit = hint => {
   const code = document.querySelector('#code');
   code.value = hint.id;
   const title = document.querySelector('#title');
@@ -134,6 +143,35 @@ const editHint = hint => {
   category.selected = 'select';
   const description = document.querySelector('#description');
   description.value = hint.description;
+  if (hint.videoUrl) {
+    const videoUrl = document.querySelector('#video');
+    videoUrl.value = hint.videoUrl;
+  }
+};
+
+const updateEditedHint = post => {
+  const editedLi = document.querySelector(`[data-id="${post.id}"`);
+  editedLi.dataset.hintCategory = post.category;
+
+  const editedLiTitle = editedLi.childNodes[0];
+  const editedLiLanguage = editedLi.childNodes[1];
+  const editedLiCategory = editedLi.childNodes[2];
+  const editedLiDescription = editedLi.childNodes[3];
+  const videoLink = editedLi.childNodes[4].firstChild;
+
+  editedLiTitle.innerText = post.title;
+  editedLiLanguage.innerHTML = `<span>Linguagem/Skill:</span> ${post.language}`;
+  editedLiCategory.innerHTML = `<span>Categoria:</span> ${transformCategoryValue(
+    post.category
+  )}`;
+  editedLiDescription.innerText = post.description;
+  videoLink.href = post.videoUrl;
+  console.log(videoLink.href);
+  if (post.videoUrl) {
+    videoLink.removeAttribute('hidden');
+  } else {
+    videoLink.setAttribute('hidden', 'hidden');
+  }
 };
 
 const deleteHintFromPage = hint => {
@@ -148,7 +186,7 @@ const deleteHintFromPage = hint => {
     );
     deletedHint.remove();
 
-    updateHintCountByCategory(hint, true);
+    updateHintCountByCategory(hint.category, true);
   }
 };
 
@@ -156,8 +194,6 @@ const submitForm = async event => {
   event.preventDefault();
 
   const code = event.target.code.value;
-
-  console.log(code);
 
   const post = {
     title: event.target.title.value,
@@ -173,36 +209,43 @@ const submitForm = async event => {
       `Você está editando a dica com título ${post.title}. Você confirma a edição?`
     );
 
-    confirmUpdate && updateHint(post);
+    if (confirmUpdate) {
+      await updateHint(post);
+      updateEditedHint(post);
+      getStatistics();
+      form.reset();
+    }
   } else {
     const createdHint = await createHint(post);
     createHintLi(createdHint);
-    updateHintCountByCategory(createdHint);
+    updateHintCountByCategory(createdHint.category);
     alert('Dica cadastrada com sucesso!');
+    form.reset();
   }
 };
 
-const filterHintsByCategory = (hints, filter) => {
-  hintsList.innerHTML = '';
+const filterHintsByCategory = filter => {
+  const hintsLi = document.querySelectorAll('[data-hint-category]');
 
-  const filteredHintList = hints.filter(
-    hint => parseInt(hint.category) === filter
-  );
-
-  filteredHintList.forEach(hint => {
-    createHintLi(hint);
+  hintsLi.forEach(hint => {
+    if (parseInt(hint.dataset.hintCategory) === filter || filter === 0) {
+      hint.removeAttribute('hidden');
+    } else {
+      hint.setAttribute('hidden', 'hidden');
+    }
   });
 };
 
-const filterHintsByTitle = async title => {
-  hintsList.innerHTML = '';
-  const hints = await getHints();
+const filterHintsByTitle = title => {
+  const hintsLi = document.querySelectorAll('[data-hint-category]');
 
-  const filteredHintList = hints.filter(hint => {
-    return hint.title.toLowerCase().includes(title.toLowerCase());
-  });
-  filteredHintList.forEach(hint => {
-    createHintLi(hint);
+  hintsLi.forEach(hint => {
+    const hintTitle = hint.firstChild.innerText.toLowerCase();
+    if (hintTitle.includes(title.toLowerCase())) {
+      hint.removeAttribute('hidden');
+    } else {
+      hint.setAttribute('hidden', 'hidden');
+    }
   });
 };
 
@@ -214,21 +257,17 @@ searchButton.addEventListener('click', () => {
   }
 });
 
-resetSearch.addEventListener('click', async () => {
+resetSearch.addEventListener('click', () => {
+  const hintsLi = document.querySelectorAll('[data-hint-category]');
   const input = document.querySelector('#search-input');
   input.value = '';
-  const hints = await getHints();
-  populateHints(hints);
+
+  hintsLi.forEach(hint => hint.removeAttribute('hidden'));
 });
 
 statisticsDivs.forEach((div, index) => {
-  div.addEventListener('click', async () => {
-    const hints = await getHints();
-    if (index === 0) {
-      populateHints(hints);
-    } else {
-      filterHintsByCategory(hints, index);
-    }
+  div.addEventListener('click', () => {
+    filterHintsByCategory(index);
   });
 });
 
@@ -239,5 +278,5 @@ form.addEventListener('submit', event => {
 window.addEventListener('load', async () => {
   const hints = await getHints();
   populateHints(hints);
-  getStatistics(hints);
+  getStatistics();
 });
