@@ -3,7 +3,11 @@
 <!-- toc -->
 
 - [Introdução](#introdução)
-
+- [Adicionando novas dicas](#adicionando-novas-dicas)
+- [Editando as dicas](#editando-as-dicas)
+- [Deletando as dicas](#deletando-dicas)
+- [Filtrando dicas](#filtrando-dicas)
+- [Primeiros passos](#primeiros-passos)
 
 
 ## Introdução
@@ -12,7 +16,7 @@ A LAB Developer Software House está contratando novos desenvolvedores para o se
 
 ## Aplicação
 
-### Adicionando novas dicas:
+### Adicionando novas dicas
 A aplicação possui um formulário onde podemos cadastrar novas dicas, sendo *necessários* os seguintes campos:
 <ul>
   <li>Título</li>
@@ -33,7 +37,7 @@ Após, você receberá uma confirmação de que a dica foi cadastrada com sucess
 
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/create-succes.JPG?raw=true)
 
-### Editando as dicas:
+### Editando as dicas
 
 Todas dicas possuem um botão no canto inferior direito, onde é possível fazer a edição das informações
 
@@ -53,17 +57,21 @@ Ao realizar a atualização, repare que a contagem de cada categoria foi atualiz
 
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/edited-hint.JPG?raw=true)
 
-### Deletando dicas:
+### Deletando dicas
 
 Ao lado do botão de edição, existe o botão de exclusão. Ao ser clicado um modal será exibido, sendo necessária a confirmação para a exclusão da dica. Um vez excluída, a dica não poderá ser recuperada.
 
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/confirm-delete.JPG?raw=true)
 
-### Filtrando dicas:
+### Filtrando dicas
+
+#### Por categoria
 
 Utilizando os cards da parte superior da tela podemos filtras as dicas pela categoria:
 
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/category-filter.JPG?raw=true)
+
+#### Pelo título
 
 Também podemos filtrar as dicas pelo título utilizando a barra de pesquisa. Ao clicar em pesquisar, serão exibidas todas as dicas que possuem a substring pesquisada em seu título, não esta pesquisa **case insensitive**.
 Ao clicar no botão de cancelar busca, a busca é cancelada e todas as dicas serão exibidas novamente.
