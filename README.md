@@ -1,12 +1,14 @@
 # DEVinKnowledge
 
-<!-- toc -->
+Conteúdos:
 
 - [Introdução](#introdução)
 - [Adicionando novas dicas](#adicionando-novas-dicas)
 - [Editando as dicas](#editando-as-dicas)
 - [Deletando as dicas](#deletando-dicas)
 - [Filtrando dicas](#filtrando-dicas)
+  * [Por categoria](#por-categoria)
+  * [Pelo título](#pelo-título)
 - [Primeiros passos](#primeiros-passos)
 
 
