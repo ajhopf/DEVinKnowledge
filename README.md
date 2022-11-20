@@ -1,8 +1,36 @@
 # DEVinKnowledge
 
-## Projeto criado utilizando Json Server para armazenamento dos dados.
+##Introdução
 
-### Primeiros passos:
+A LAB Developer Software House está contratando novos desenvolvedores para o seu quadro de colaboradores, com o intuito de expandir os negócios. Os gestores entendem que com a chegada dos novos funcionários, será necessário realizar um onboarding contínuo para que todos fiquem em sintonia. Para isso, foi solicitado a criação de um sistema de Base do Conhecimento, com objetivo de manter as dicas e padronização da programação em um único lugar de fácil acesso para todos. É hora de ficar feliz, pois você foi escolhido para criar o DEVinKnowledge.
+
+## Aplicação
+
+### Adicionando novas dicas:
+A aplicação possui um formulário onde podemos cadastrar novas dicas, sendo *necessários* os seguintes campos:
+<ul>
+  <li>Título</li>
+  <li>Linguagem ou skill relacionado à dica</li>
+  <li>Categoria em que se encaixa a dica: front-end, back-end, full-stack ou soft-skills</li>
+  <li>Corpo de texto contento as informações relevantes</li>
+</ul>
+
+É também opcional a inclusão de um link de um vídeo do youtube na dica.
+
+Ao clicar no botão para salvar, um modal será exibido contendo as informações da dica criada para revisão, sendo necessário a confirmação para a inserção da dica no banco de dados.
+
+Automaticamente a dica será renderizada na página e as estatísticas atualizadas.
+
+![Alt text](./assets/images/readme/creating.JPG)
+
+### Editando as dicas:
+
+
+
+
+Ao salvarmos a dica
+
+## Primeiros passos:
 
 Para clonar o repositório é preciso executar o comando
 
@@ -19,6 +47,7 @@ cd DEVinKnowledge
 # Instalar as dependencias do projeto
 npm install
 ```
+##Obs: se você seguir o passo a passo a seguir (*recomendado*) não é necessário rodar o comando npm install dentro da pasta do projeto.
 
 ## Atenção!
 
@@ -28,6 +57,8 @@ Este projeto foi desenvolvido de maneira a reduzir o número de chamadas ao serv
 
 Para poder usufruir dessa funcionalidade, é necessário fazer a instalação do json-server em outra pasta:
 
+## Obs: recomendamos fortemente que você siga este método para utilizar a aplicação.
+
 1) Instale o JSON server
 
 Dentro da pasta que você deseja criar o servidor rode o seguinte comando:
@@ -36,7 +67,7 @@ Dentro da pasta que você deseja criar o servidor rode o seguinte comando:
 npm install json-server
 ```
 
-Crie um arquivo `db.json` com o seguinte conteúdo:
+2) Crie um arquivo `db.json` com o seguinte conteúdo:
 
 ```bash
 {
@@ -44,13 +75,13 @@ Crie um arquivo `db.json` com o seguinte conteúdo:
 }
 ```
 
-Dentro do arquivo `package.json` adicione o seguinte script:
+3) Dentro do arquivo `package.json` adicione o seguinte script:
 
 ```bash
 "start": "json-server --watch data/db.json"
 ```
 
-Inicialize o servidor com o comando start:
+4) Inicialize o servidor com o comando start:
 
 ```bash
 npm start
@@ -62,6 +93,7 @@ O servidor roda a partir da porta 3000:
 http://localhost:3000
 ```
 
+Clique [aqui](https://github.com/typicode/json-server) para mais informações sobre o json-server.
 
 
 
