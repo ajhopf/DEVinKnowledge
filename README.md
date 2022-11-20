@@ -21,7 +21,7 @@ Ao clicar no botão para salvar, um modal será exibido contendo as informaçõe
 
 Automaticamente a dica será renderizada na página e as estatísticas atualizadas.
 
-![alt text]([https://github.com/ajhopf/DEVinKnowledge/assets/images/readme/creating.JPG](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/creating.JPG?raw=true)
+![alt text](https://github.com/ajhopf/DEVinKnowledge/assets/images/readme/creating.JPG](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/creating.JPG?raw=true)
 
 ### Editando as dicas:
 
