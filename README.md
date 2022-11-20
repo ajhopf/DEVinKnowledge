@@ -42,10 +42,10 @@ Ao clicar salvar, será feita uma confirmação via modal das informações atua
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/confirm-edit.JPG?raw=true)
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/edit-success.JPG?raw=true)
 
-No exemplo abaixo, a dica estava cadastrada com a categoria errada e também sem link de vídeo.
-Ao realizar a atualização, a contagem de cada categoria foi atualizada assim como o botão de vídeo dentro da dica tornou-se disponível.
+No exemplo aqui apresentado, a dica estava cadastrada com a categoria errada e também sem link de vídeo.
+Ao realizar a atualização, repare que a contagem de cada categoria foi atualizada assim como o botão de vídeo dentro da dica tornou-se disponível.
 
-![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/editd-hint.JPG?raw=true)
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/edited-hint.JPG?raw=true)
 
 
 
