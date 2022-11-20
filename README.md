@@ -29,7 +29,7 @@ A aplicação possui um formulário onde podemos cadastrar novas dicas, sendo *n
 
 É também opcional a inclusão de um link de um vídeo do youtube na dica.
 
-Ao clicar no botão para salvar, um modal será exibido contendo as informações da dica criada para revisão, sendo necessário a confirmação para a inserção da dica no banco de dados.
+Ao clicar no botão para salvar, um modal será exibido contendo as informações da dica criada para revisão, sendo necessária a confirmação para a inserção da dica no banco de dados.
 
 Automaticamente a dica será renderizada na página e as estatísticas atualizadas.
 
