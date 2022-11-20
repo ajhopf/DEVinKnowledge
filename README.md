@@ -1,5 +1,11 @@
 # DEVinKnowledge
 
+<!-- toc -->
+
+- [Introdução] (#introdução)
+
+
+
 ## Introdução
 
 A LAB Developer Software House está contratando novos desenvolvedores para o seu quadro de colaboradores, com o intuito de expandir os negócios. Os gestores entendem que com a chegada dos novos funcionários, será necessário realizar um onboarding contínuo para que todos fiquem em sintonia. Para isso, foi solicitado a criação de um sistema de Base do Conhecimento, com objetivo de manter as dicas e padronização da programação em um único lugar de fácil acesso para todos. É hora de ficar feliz, pois você foi escolhido para criar o DEVinKnowledge.
