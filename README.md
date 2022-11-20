@@ -47,10 +47,23 @@ Ao realizar a atualização, repare que a contagem de cada categoria foi atualiz
 
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/edited-hint.JPG?raw=true)
 
+### Deletando dicas:
 
+Ao lado do botão de edição, existe o botão de exclusão. Ao ser clicado um modal será exibido, sendo necessária a confirmação para a exclusão da dica. Um vez excluída, a dica não poderá ser recuperada.
 
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/confirm-delete.JPG?raw=true)
 
-Ao salvarmos a dica
+### Filtrando dicas:
+
+Utilizando os cards da parte superior da tela podemos filtras as dicas pela categoria:
+
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/category-filter.JPG?raw=true)
+
+Também podemos filtrar as dicas pelo título utilizando a barra de pesquisa. Ao clicar em pesquisar, serão exibidas todas as dicas que possuem a substring pesquisada em seu título, não esta pesquisa **case insensitive**.
+Ao clicar no botão de cancelar busca, a busca é cancelada e todas as dicas serão exibidas novamente.
+
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/title-filter.JPG?raw=true)
+
 
 ## Primeiros passos:
 
