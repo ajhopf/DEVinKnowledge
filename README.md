@@ -25,7 +25,7 @@ Automaticamente a dica será renderizada na página e as estatísticas atualizad
 
 Após, você receberá uma confirmação de que a dica foi cadastrada com sucesso:
 
-![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/create-success.JPG?raw=true)
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/create-succes.JPG?raw=true)
 
 ### Editando as dicas:
 
