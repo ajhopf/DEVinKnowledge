@@ -1,6 +1,6 @@
 # DEVinKnowledge
 
-##Introdução
+## Introdução
 
 A LAB Developer Software House está contratando novos desenvolvedores para o seu quadro de colaboradores, com o intuito de expandir os negócios. Os gestores entendem que com a chegada dos novos funcionários, será necessário realizar um onboarding contínuo para que todos fiquem em sintonia. Para isso, foi solicitado a criação de um sistema de Base do Conhecimento, com objetivo de manter as dicas e padronização da programação em um único lugar de fácil acesso para todos. É hora de ficar feliz, pois você foi escolhido para criar o DEVinKnowledge.
 
@@ -23,7 +23,29 @@ Automaticamente a dica será renderizada na página e as estatísticas atualizad
 
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/creating.JPG?raw=true)
 
+Após, você receberá uma confirmação de que a dica foi cadastrada com sucesso:
+
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/create-success.JPG?raw=true)
+
 ### Editando as dicas:
+
+Todas dicas possuem um botão no canto inferior direito, onde é possível fazer a edição das informações
+
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/edit-button.JPG?raw=true)
+
+Ao clicar no botão para edição, um modal será exibido contendo o título da dica a ser editada e como prosseguir para realizar a edição
+
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/edit-modal.JPG?raw=true)
+
+Ao clicar salvar, será feita uma confirmação via modal das informações atualizadas e após você receberá a confirmação do sucesso na edição da dica:
+
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/confirm-edit.JPG?raw=true)
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/edit-success.JPG?raw=true)
+
+No exemplo abaixo, a dica estava cadastrada com a categoria errada e também sem link de vídeo.
+Ao realizar a atualização, a contagem de cada categoria foi atualizada assim como o botão de vídeo dentro da dica tornou-se disponível.
+
+![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/editd-hint.JPG?raw=true)
 
 
 
@@ -97,4 +119,4 @@ Clique [aqui](https://github.com/typicode/json-server) para mais informações s
 
 
 
-
+https://www.youtube.com/watch?v=MLkMO-_gzGc
