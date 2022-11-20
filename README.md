@@ -129,7 +129,3 @@ http://localhost:3000
 ```
 
 Clique [aqui](https://github.com/typicode/json-server) para mais informações sobre o json-server.
-
-
-
-https://www.youtube.com/watch?v=MLkMO-_gzGc
