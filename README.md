@@ -75,7 +75,7 @@ Utilizando os cards da parte superior da tela podemos filtras as dicas pela cate
 
 #### Pelo título
 
-Também podemos filtrar as dicas pelo título utilizando a barra de pesquisa. Ao clicar em pesquisar, serão exibidas todas as dicas que possuem a substring pesquisada em seu título, não esta pesquisa **case insensitive**.
+Também podemos filtrar as dicas pelo título utilizando a barra de pesquisa. Ao clicar em pesquisar, serão exibidas todas as dicas que possuem a substring pesquisada em seu título, não esta pesquisa *case insensitive*.
 Ao clicar no botão de cancelar busca, a busca é cancelada e todas as dicas serão exibidas novamente.
 
 ![alt text](https://github.com/ajhopf/DEVinKnowledge/blob/main/assets/images/readme/title-filter.JPG?raw=true)
@@ -98,7 +98,7 @@ cd DEVinKnowledge
 # Instalar as dependencias do projeto
 npm install
 ```
-##Obs: se você seguir o passo a passo a seguir (*recomendado*) não é necessário rodar o comando npm install dentro da pasta do projeto.
+## Obs: se você seguir o passo a passo a seguir (**recomendado**) não é necessário rodar o comando npm install dentro da pasta do projeto.
 
 ## Atenção!
 
