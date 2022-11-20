@@ -1,19 +1,11 @@
 {
   "hints": [
     {
-      "title": "JavaScript Assincrono",
-      "language": "JavaScript",
-      "category": "1",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed purus tellus, eleifend sit amet eleifend quis, dignissim quis ex. Aenean et dolor a sapien tincidunt dictum non non lorem. Etiam enim nisi, lacinia a ipsum quis, sollicitudin varius eros. Quisque scelerisque pharetra facilisis. Nulla mollis varius ligula, et condimentum turpis dapibus et. Aenean est nulla, commodo et est in, blandit euismod velit. Quisque efficitur tortor lectus, at ultrices dui blandit id. Suspendisse mattis rhoncus sem, et eleme",
-      "videoUrl": "https://www.youtube.com/watch?v=7Bs4-rqbCQc",
-      "id": 4
-    },
-    {
       "title": "Principais Seletores de Elementos",
       "language": "JavaScript",
       "category": "1",
       "description": "\nAlguns dos principais seletores de elementos:\n\n* document.getElementById(id);\n* document.getElementsByClassName(className);\n* document.getElementsByTagName(tagName);\n* document.querySelector(seletorCSS);\n* document.querySelectorAll(seletorCSS);\n",
-      "videoUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=MLkMO-_gzGc",
       "id": 5
     },
     {
@@ -21,7 +13,7 @@
       "language": "REST",
       "category": "2",
       "description": "### HTTP Verbs\n\nThere are 4 basic HTTP verbs we use in requests to interact with resources in a REST system:\n\n- GET — retrieve a specific resource (by id) or a collection of resources\n- POST — create a new resource\n- PUT — update a specific resource (by id)\n- DELETE — remove a specific resource by id",
-      "videoUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=cMN5aBlEljw",
       "id": 6
     },
     {
@@ -37,7 +29,7 @@
       "language": "angular",
       "category": "1",
       "description": "Mussum Ipsum, cacilds vidis litro abertis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!Detraxit consequat et quo num tendi nada.Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.\n\nQuem num gosta di mé, boa gentis num é.Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.In elementis mé pra quem é amistosis quis leo.Mauris nec dolor in eros commodo tempor.",
-      "videoUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=LFlNU30u7d8",
       "id": 9
     },
     {
@@ -45,7 +37,7 @@
       "language": "NodeJS",
       "category": "2",
       "description": "Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis.Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget.Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!",
-      "videoUrl": "https://www.youtube.com/",
+      "videoUrl": "https://www.youtube.com/watch?v=GKR6uSvEj8w",
       "id": 10
     },
     {
@@ -69,8 +61,24 @@
       "language": "comunicação",
       "category": "4",
       "description": "\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidun",
-      "videoUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=0q1-_quCtsc",
       "id": 14
+    },
+    {
+      "title": "Nova dica!!",
+      "language": "JAvajj",
+      "category": "4",
+      "description": "edadadawwaffwa aead wwa da adw",
+      "videoUrl": "",
+      "id": 18
+    },
+    {
+      "title": "mais uma ",
+      "language": "dheaihaeoiaheiea",
+      "category": "2",
+      "description": "feaefaaefafe fea feaef aef efaaefefa aef ",
+      "videoUrl": "",
+      "id": 19
     }
   ]
 }

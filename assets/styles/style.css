@@ -22,12 +22,16 @@ body {
   
 }
 
+/* --------------------- Left div -----------------------*/
+
 .left-div {
   display: flex;
   flex-direction: column;
   width: 30%;
   
 }
+
+/* --------------------- Header -----------------------*/
 
 header{
   height: 8rem;
@@ -47,6 +51,7 @@ header * {
   margin: 0 0.5rem
 }
 
+/* --------------------- Form -----------------------*/
 .form-wrapper {
   display: flex;
   align-items: center;
@@ -91,11 +96,15 @@ header * {
   box-shadow: 1.5px 1.5px 2.5px black;
 }
 
+/* --------------------- Right div -----------------------*/
+
 .right-div {
   display: flex;
   flex-direction: column;
   flex: 1;;
 }
+
+/* --------------------- Statistics -----------------------*/
 
 .statistics {
   display: flex;
@@ -132,6 +141,8 @@ header * {
   text-shadow: 2px 2px 3px black;
   cursor: pointer;
 }
+
+/* --------------------- Search bar -----------------------*/
 
 .search-bar {
   margin-top: 8rem;
@@ -180,7 +191,7 @@ header * {
   background-color: #FF6666;
 }
 
-
+/* --------------------- Hint list -----------------------*/
 
 .hints-wrapper {
   margin-top: 11rem;
@@ -233,6 +244,7 @@ header * {
   font-weight: bold;
 }
 
+/* --------------------- Hint buttons -----------------------*/
 .hint-buttons {
   text-align: right;
   display: flex;
@@ -247,11 +259,6 @@ header * {
   transition: all 0.5s;
 }
 
-.hint-buttons a {
-  color: black;
-}
-
-
 
 .hint-buttons button:hover {
   color: #FF6666
@@ -264,6 +271,7 @@ header * {
   color:#FFCB47
 }
 
+/* --------------------- Buttons Tooltips -----------------------*/
 
 .tooltip {
   position: relative;
@@ -292,6 +300,7 @@ header * {
   font-size: 0.75rem;
 }
 
+/* --------------------- Modal -----------------------*/
 
 .modal {
   display: none; /* Hidden by default */
@@ -310,7 +319,6 @@ header * {
   position: relative;
   background-color: #fefefe;
   margin: auto;
-  
   top: 30%;
   border: 0px solid #fff;
   border-radius: 10px;
@@ -344,37 +352,27 @@ header * {
   text-shadow: 1px 1px 2px black;
 }
 
-[data-modal = deleteModal]{
-  background-color: #FF6666;
-}
-
-[data-modal = editModal] {
-  background-color: #FFCB47;
-}
-
-[data-modal = confirmModal] {
-  background-color: #5cb85c;
-}
-
-[data-modal = videoModal] {
-  background-color: var(--blue);
-}
-
 /* Modal Body */
 .modal-body {
-  margin-top: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
   padding: 2px 16px;
   min-height: 100px;
 }
 
 .modal-body iframe {
+  margin: 1rem 0;
   width: 620px;
   height: 415px;
 }
 
 /* Modal Footer */
 .modal-footer {
+  border-radius: 0 0 10px 10px;
   display: flex;
   align-items: center;
   min-height: 2.5rem;
@@ -405,4 +403,25 @@ header * {
 @keyframes animatetop {
   from {top: -300px; opacity: 0;}
   to {top: 30%; opacity: 1;}
+}
+
+
+[data-modal = deleteModal]{
+  background-color: #FF6666;
+}
+
+[data-modal = editModal] {
+  background-color: #FFCB47;
+}
+
+[data-modal = confirmModal] {
+  background-color: var(--grey);
+}
+
+[data-modal = successModal] {
+  background-color: #5cb85c;
+}
+
+[data-modal = videoModal] {
+  background-color: var(--blue);
 }

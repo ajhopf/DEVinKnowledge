@@ -10,8 +10,14 @@ const hintsList = document.querySelector('.hints-list');
 const statisticsDivs = document.querySelectorAll('.statistics div');
 const searchButton = document.querySelector('#search-button');
 const resetSearch = document.querySelector('#search-reset');
-const myModal = document.querySelector('#myModal');
-const modalCloseButton = document.getElementsByClassName('close')[0];
+
+const modal = document.querySelector('#info-modal');
+const modalCloseButton = document.querySelector('.close');
+const modalHeader = document.querySelector('.modal-header');
+const modalBody = document.querySelector('.modal-body');
+const modalTitle = document.querySelector('.modal-header h2');
+const modalText = document.querySelector('.modal-body p');
+const modalFooter = document.querySelector('.modal-footer');
 
 const transformCategoryValue = value => {
   let text;
@@ -59,48 +65,46 @@ const createHintLi = hint => {
   buttonsDiv.classList.add('hint-buttons');
 
   //videoButton
-
   if (hint.videoUrl) {
     videoButton.innerHTML =
       '<i class="fa-solid fa-video fa-2x"></i><span class="tooltiptext">Ver vídeo</span>';
+    videoButton.addEventListener('click', () => {
+      populateVideoButtonModal(hint);
+    });
     // videoButton.href = hint.videoUrl;
   } else {
     videoButton.setAttribute('hidden', true);
   }
-  videoButton.addEventListener('click', () => {
-    populateVideoModal(hint);
-  });
+
   videoButton.classList.add('tooltip');
 
   //delete Button
-
   deleteButton.innerHTML =
     '<i class="fa-solid fa-trash fa-2x"></i><span class="tooltiptext">Deletar dica</span>';
   deleteButton.addEventListener('click', () => {
-    populateDeleteModal(hint);
+    populateDeleteButtonModal(hint);
   });
-
   deleteButton.classList.add('tooltip');
 
   //edit Button
   editButton.innerHTML =
     '<i class="fa-solid fa-pen-to-square fa-2x"></i></i><span class="tooltiptext">Editar dica</span>';
   editButton.addEventListener('click', event => {
-    populateEditModal(hint);
+    populateEditButtonModal(hint);
     sendHintToFormToEdit(hint);
   });
   editButton.classList.add('tooltip');
-
-  li.appendChild(title);
-  li.appendChild(language);
-  li.appendChild(category);
-  li.appendChild(description);
 
   buttonsDiv.appendChild(videoButton);
   buttonsDiv.appendChild(deleteButton);
   buttonsDiv.appendChild(editButton);
 
+  li.appendChild(title);
+  li.appendChild(language);
+  li.appendChild(category);
+  li.appendChild(description);
   li.appendChild(buttonsDiv);
+
   li.setAttribute('data-id', hint.id);
   li.setAttribute('data-hint-category', hint.category);
 
@@ -164,7 +168,6 @@ const sendHintToFormToEdit = hint => {
 };
 
 const updateEditedHint = post => {
-  console.log(post);
   const editedLi = document.querySelector(`[data-id="${post.id}"`);
   editedLi.dataset.hintCategory = post.category;
 
@@ -172,7 +175,7 @@ const updateEditedHint = post => {
   const editedLiLanguage = editedLi.childNodes[1];
   const editedLiCategory = editedLi.childNodes[2];
   const editedLiDescription = editedLi.childNodes[3];
-  const videoLink = editedLi.childNodes[4].firstChild;
+  const videoButton = editedLi.childNodes[4].firstChild;
 
   editedLiTitle.innerText = post.title;
   editedLiLanguage.innerHTML = `<span>Linguagem/Skill:</span> ${post.language}`;
@@ -180,20 +183,33 @@ const updateEditedHint = post => {
     post.category
   )}`;
   editedLiDescription.innerText = post.description;
-  videoLink.href = post.videoUrl;
-  console.log(videoLink.href);
+  // videoLink.href = post.videoUrl;
+  console.log(videoButton);
   if (post.videoUrl) {
-    videoLink.removeAttribute('hidden');
-    videoLink.innerHTML =
+    videoButton.removeAttribute('hidden');
+    videoButton.innerHTML =
       '<i class="fa-solid fa-video fa-2x"></i><span class="tooltiptext">Ver vídeo</span>';
+    videoButton.addEventListener('click', () => {
+      populateVideoButtonModal(post);
+    });
   } else {
-    videoLink.innerHTML = '';
-    videoLink.setAttribute('hidden', 'hidden');
+    videoButton.innerHTML = '';
+    videoButton.setAttribute('hidden', 'hidden');
   }
 };
 
-const eraseModal = () => {
-  const modalHeader = document.querySelector('.modal-header');
+const deleteHintFromPage = hint => {
+  deleteHint(hint.id);
+
+  const deletedHint = document.querySelector(
+    `[data-id="${hint.id.toString()}"]`
+  );
+  deletedHint.remove();
+
+  updateHintCountByCategory(hint.category, true);
+};
+
+const resetModal = () => {
   modalHeader.dataset.modal = '';
   const modalIframe = document.querySelector('.modal-body iframe');
 
@@ -203,80 +219,91 @@ const eraseModal = () => {
     videoError.remove();
   }
 
-  const modalFooter = document.querySelector('.modal-footer');
   modalFooter.dataset.modal = '';
   modalFooter.innerHTML = '';
-  myModal.style.display = 'none';
+  modal.style.display = 'none';
 };
 
-const populateConfirmModal = (hint, operation) => {
-  myModal.style.display = 'block';
-  const modalHeader = document.querySelector('.modal-header');
-  modalHeader.dataset.modal = 'confirmModal';
-
-  const modalTitle = document.querySelector('.modal-header h2');
+const successModal = (hint, operation) => {
+  modal.style.display = 'block';
+  modalHeader.dataset.modal = 'successModal';
   modalTitle.innerText = `Dica ${operation} com sucesso!`;
-  const modalText = document.querySelector('.modal-body p');
   modalText.innerText = `Título da dica ${operation}: ${hint.title}`;
 };
 
-const populateDeleteModal = hint => {
-  myModal.style.display = 'block';
-  const modalHeader = document.querySelector('.modal-header');
-  modalHeader.dataset.modal = 'deleteModal';
+const confirmOperationModal = (hint, operation) => {
+  modal.style.display = 'block';
+  modalHeader.dataset.modal = 'confirmModal';
+  modalFooter.dataset.modal = 'confirmModal';
 
-  const modalTitle = document.querySelector('.modal-header h2');
+  if (operation === 'edit') {
+    modalTitle.innerText = `Atualizando dica no banco de dados`;
+  } else {
+    modalTitle.innerText = `Criando dica no banco de dados`;
+  }
+
+  modalText.innerText = `Título da dica: ${hint.title}\nLinguagem: ${
+    hint.language
+  }\nCategoria: ${transformCategoryValue(hint.category)}\n Descrição: ${
+    hint.description
+  }`;
+
+  const confirmButton = document.createElement('button');
+  confirmButton.innerText = 'Confirmar';
+  modalFooter.appendChild(confirmButton);
+
+  confirmButton.onclick = () => {
+    if (operation === 'edit') {
+      editHint(hint);
+      resetModal();
+    }
+    if (operation === 'submit') {
+      submitHint(hint);
+      resetModal();
+    }
+  };
+};
+
+const populateDeleteButtonModal = hint => {
+  modal.style.display = 'block';
+  modalHeader.dataset.modal = 'deleteModal';
+  modalFooter.dataset.modal = 'deleteModal';
+
   modalTitle.innerText = `Você está prestes a deletar permanentemente uma dica!`;
-  const modalText = document.querySelector('.modal-body p');
   modalText.innerText = `Título da dica a ser deletada: ${hint.title}`;
 
-  const modalFooter = document.querySelector('.modal-footer');
-  modalFooter.dataset.modal = 'deleteModal';
   const confirmButton = document.createElement('button');
   confirmButton.innerText = 'Confirmar operação';
-
   modalFooter.appendChild(confirmButton);
 
   confirmButton.onclick = () => {
     deleteHintFromPage(hint);
-    eraseModal();
+    resetModal();
   };
 };
 
-const populateEditModal = hint => {
-  myModal.style.display = 'block';
-  const modalHeader = document.querySelector('.modal-header');
+const populateEditButtonModal = hint => {
+  modal.style.display = 'block';
   modalHeader.dataset.modal = 'editModal';
-
-  const modalTitle = document.querySelector('.modal-header h2');
-  modalTitle.innerText = `Você entrou no modo de edição de dica`;
-  const modalText = document.querySelector('.modal-body p');
-  modalText.innerText = `As informações da dica ${hint.title} foram enviadas ao formulário.\n Após a edição, clique em salvar para confirmar a edição da dica ou em limpar para sair do modo edição`;
-
-  const modalFooter = document.querySelector('.modal-footer');
   modalFooter.dataset.modal = 'editModal';
+
+  modalTitle.innerText = `Você entrou no modo de edição de dica`;
+  modalText.innerText = `As informações da dica "${hint.title}" foram enviadas ao formulário.\n Após a edição, clique em salvar para confirmar a edição da dica ou em limpar para sair do modo edição`;
+
   const confirmButton = document.createElement('button');
   confirmButton.innerText = 'ok';
-
   modalFooter.appendChild(confirmButton);
 
   confirmButton.onclick = () => {
-    eraseModal();
+    resetModal();
   };
 };
 
-const populateVideoModal = hint => {
-  console.log(hint);
-
-  myModal.style.display = 'block';
-
-  const modalHeader = document.querySelector('.modal-header');
+const populateVideoButtonModal = hint => {
+  modal.style.display = 'block';
   modalHeader.dataset.modal = 'videoModal';
-  const modalTitle = document.querySelector('.modal-header h2');
-  modalTitle.innerText = `Educação continuada - Vídeo Aulas`;
 
-  const modalBody = document.querySelector('.modal-body');
-  const modalText = document.querySelector('.modal-body p');
+  modalTitle.innerText = `Educação continuada - Vídeo Aulas`;
   modalText.innerHTML = `Vídeo da dica: ${hint.title}.`;
 
   const videoError = document.createElement('p');
@@ -292,15 +319,30 @@ const populateVideoModal = hint => {
   modalBody.appendChild(videoError);
 };
 
-const deleteHintFromPage = hint => {
-  deleteHint(hint.id);
+const editHint = async post => {
+  try {
+    await updateHint(post);
+    updateEditedHint(post);
+    getStatistics();
+    successModal(post, 'atualizada');
+    form.reset();
+  } catch (error) {
+    console.error(`Não foi possível atualizar a dica! Erro: ${error}`);
+  }
+};
 
-  const deletedHint = document.querySelector(
-    `[data-id="${hint.id.toString()}"]`
-  );
-  deletedHint.remove();
-
-  updateHintCountByCategory(hint.category, true);
+const submitHint = async post => {
+  try {
+    const createdHint = await createHint(post);
+    createHintLi(createdHint);
+    updateHintCountByCategory(createdHint.category);
+    successModal(createdHint, 'cadastrada');
+    form.reset();
+  } catch (error) {
+    console.error(
+      `Não foi possível adicionar a dica ao banco dados! Erro: ${error}`
+    );
+  }
 };
 
 const submitForm = async event => {
@@ -318,31 +360,9 @@ const submitForm = async event => {
   };
 
   if (code) {
-    let confirmUpdate = confirm('confirma a edição?');
-
-    if (confirmUpdate) {
-      try {
-        await updateHint(post);
-        updateEditedHint(post);
-        getStatistics();
-        populateConfirmModal(post, 'atualizada');
-        form.reset();
-      } catch (error) {
-        console.error(`Não foi possível atualizar a dica! Erro: ${error}`);
-      }
-    }
+    confirmOperationModal(post, 'edit');
   } else {
-    try {
-      const createdHint = await createHint(post);
-      createHintLi(createdHint);
-      updateHintCountByCategory(createdHint.category);
-      populateConfirmModal(createdHint, 'cadastrada');
-      form.reset();
-    } catch (error) {
-      console.error(
-        `Não foi possível adicionar a dica ao banco dados! Erro: ${error}`
-      );
-    }
+    confirmOperationModal(post, 'submit');
   }
 };
 
@@ -397,11 +417,11 @@ form.addEventListener('submit', event => {
   submitForm(event);
 });
 
-modalCloseButton.addEventListener('click', eraseModal);
+modalCloseButton.addEventListener('click', resetModal);
 
 window.addEventListener('click', event => {
-  if (event.target === myModal) {
-    eraseModal();
+  if (event.target === modal) {
+    resetModal();
   }
 });
 
