@@ -106,7 +106,7 @@ header * {
   position: fixed;
   width: 70%;
   background-color: white;
-  z-index: 999;
+  z-index: 998;
 }
 
 .statistics div {
@@ -142,7 +142,7 @@ header * {
   display: grid;
   grid-template-columns: 10fr 0.5fr 0.5fr;
   padding: 0 1rem;
-  z-index: 998;
+  z-index: 997;
   align-items: center;
 }
 
@@ -251,18 +251,18 @@ header * {
   color: black;
 }
 
-.hint-buttons a:hover {
-  color: var(--light-blue)
-}
+
 
 .hint-buttons button:hover {
   color: #FF6666
+}
+.hint-buttons button:first-child:hover {
+  color: var(--light-blue)
 }
 
 .hint-buttons button:last-child:hover {
   color:#FFCB47
 }
-
 
 
 .tooltip {
@@ -290,4 +290,119 @@ header * {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   font-size: 0.75rem;
+}
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0,0.4);
+}
+
+/* Modal Content/Box */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  
+  top: 30%;
+  border: 0px solid #fff;
+  border-radius: 10px;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* The Close Button */
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.modal-header {
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  padding: 2px 16px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+[data-modal = deleteModal]{
+  background-color: #FF6666;
+}
+
+[data-modal = editModal] {
+  background-color: #FFCB47;
+}
+
+[data-modal = confirmModal] {
+  background-color: #5cb85c;
+}
+
+[data-modal = videoModal] {
+  background-color: var(--blue);
+}
+
+/* Modal Body */
+.modal-body {
+  margin-top: 10px;
+  text-align: center;
+  padding: 2px 16px;
+  min-height: 100px;
+}
+
+.modal-body iframe {
+  width: 620px;
+  height: 415px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 2px 16px;
+  color: white;
+  justify-content: center;
+}
+
+.modal-footer button {
+  height: 2rem;
+  font-size: 1.125rem;
+  width: 20rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  -webkit-box-shadow:  0.75px 0.75px 3px 0.75px rgba(0,0,0,0.75);
+  -moz-box-shadow:  0.75px 0.75px 3px 0.75px rgba(0,0,0,0.75);
+  box-shadow:  0.75px 0.75px 3px 0.75px rgba(0,0,0,0.75);
+}
+
+.modal-footer button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: inset 0.75px 0.75px 3px 0.75px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0.75px 0.75px 3px 0.75px rgba(0,0,0,0.75);
+  box-shadow: inset 0.75px 0.75px 3px 0.75px rgba(0,0,0,0.75);
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0;}
+  to {top: 30%; opacity: 1;}
 }

@@ -10,11 +10,8 @@ const hintsList = document.querySelector('.hints-list');
 const statisticsDivs = document.querySelectorAll('.statistics div');
 const searchButton = document.querySelector('#search-button');
 const resetSearch = document.querySelector('#search-reset');
-
-const popoverList = popoverList =>
-  [...popoverList].map(
-    popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl)
-  );
+const myModal = document.querySelector('#myModal');
+const modalCloseButton = document.getElementsByClassName('close')[0];
 
 const transformCategoryValue = value => {
   let text;
@@ -46,7 +43,7 @@ const createHintLi = hint => {
   const description = document.createElement('p');
 
   const buttonsDiv = document.createElement('div');
-  const videoButton = document.createElement('a');
+  const videoButton = document.createElement('button');
   const deleteButton = document.createElement('button');
   const editButton = document.createElement('button');
 
@@ -62,36 +59,35 @@ const createHintLi = hint => {
   buttonsDiv.classList.add('hint-buttons');
 
   //videoButton
-  videoButton.innerHTML =
-    '<i class="fa-solid fa-video fa-2x"></i><span class="tooltiptext">Ver vídeo</span>';
 
-  // videoButton.dataset.bsToggle = 'popover';
-  // videoButton.dataset.bsTitle = 'Youtube Video';
-  // videoButton.dataset.bsContent =
-  //   'And heres some amazing content. Its very engaging. Right?';
   if (hint.videoUrl) {
-    videoButton.href = hint.videoUrl;
+    videoButton.innerHTML =
+      '<i class="fa-solid fa-video fa-2x"></i><span class="tooltiptext">Ver vídeo</span>';
+    // videoButton.href = hint.videoUrl;
   } else {
-    videoButton.setAttribute('hidden', 'hidden');
+    videoButton.setAttribute('hidden', true);
   }
-
-  videoButton.setAttribute('target', '_blank');
+  videoButton.addEventListener('click', () => {
+    populateVideoModal(hint);
+  });
   videoButton.classList.add('tooltip');
 
   //delete Button
+
   deleteButton.innerHTML =
     '<i class="fa-solid fa-trash fa-2x"></i><span class="tooltiptext">Deletar dica</span>';
-  deleteButton.addEventListener('click', () => deleteHintFromPage(hint));
+  deleteButton.addEventListener('click', () => {
+    populateDeleteModal(hint);
+  });
+
   deleteButton.classList.add('tooltip');
 
   //edit Button
   editButton.innerHTML =
     '<i class="fa-solid fa-pen-to-square fa-2x"></i></i><span class="tooltiptext">Editar dica</span>';
   editButton.addEventListener('click', event => {
+    populateEditModal(hint);
     sendHintToFormToEdit(hint);
-    alert(
-      'As informações da dica selecionada para edição foram enviadas para o formulário. Realize as devidas edições e clique em Salvar para finalizar.'
-    );
   });
   editButton.classList.add('tooltip');
 
@@ -103,6 +99,7 @@ const createHintLi = hint => {
   buttonsDiv.appendChild(videoButton);
   buttonsDiv.appendChild(deleteButton);
   buttonsDiv.appendChild(editButton);
+
   li.appendChild(buttonsDiv);
   li.setAttribute('data-id', hint.id);
   li.setAttribute('data-hint-category', hint.category);
@@ -167,6 +164,7 @@ const sendHintToFormToEdit = hint => {
 };
 
 const updateEditedHint = post => {
+  console.log(post);
   const editedLi = document.querySelector(`[data-id="${post.id}"`);
   editedLi.dataset.hintCategory = post.category;
 
@@ -186,25 +184,123 @@ const updateEditedHint = post => {
   console.log(videoLink.href);
   if (post.videoUrl) {
     videoLink.removeAttribute('hidden');
+    videoLink.innerHTML =
+      '<i class="fa-solid fa-video fa-2x"></i><span class="tooltiptext">Ver vídeo</span>';
   } else {
+    videoLink.innerHTML = '';
     videoLink.setAttribute('hidden', 'hidden');
   }
 };
 
-const deleteHintFromPage = hint => {
-  let confirmDelete = confirm(
-    `Tem certeza de que deseja excluir a dica com título de ${title.innerText}?`
-  );
-  if (confirmDelete) {
-    deleteHint(hint.id);
+const eraseModal = () => {
+  const modalHeader = document.querySelector('.modal-header');
+  modalHeader.dataset.modal = '';
+  const modalIframe = document.querySelector('.modal-body iframe');
 
-    const deletedHint = document.querySelector(
-      `[data-id="${hint.id.toString()}"]`
-    );
-    deletedHint.remove();
-
-    updateHintCountByCategory(hint.category, true);
+  if (modalIframe) {
+    modalIframe.remove();
+    const videoError = document.querySelector('.videoError');
+    videoError.remove();
   }
+
+  const modalFooter = document.querySelector('.modal-footer');
+  modalFooter.dataset.modal = '';
+  modalFooter.innerHTML = '';
+  myModal.style.display = 'none';
+};
+
+const populateConfirmModal = (hint, operation) => {
+  myModal.style.display = 'block';
+  const modalHeader = document.querySelector('.modal-header');
+  modalHeader.dataset.modal = 'confirmModal';
+
+  const modalTitle = document.querySelector('.modal-header h2');
+  modalTitle.innerText = `Dica ${operation} com sucesso!`;
+  const modalText = document.querySelector('.modal-body p');
+  modalText.innerText = `Título da dica ${operation}: ${hint.title}`;
+};
+
+const populateDeleteModal = hint => {
+  myModal.style.display = 'block';
+  const modalHeader = document.querySelector('.modal-header');
+  modalHeader.dataset.modal = 'deleteModal';
+
+  const modalTitle = document.querySelector('.modal-header h2');
+  modalTitle.innerText = `Você está prestes a deletar permanentemente uma dica!`;
+  const modalText = document.querySelector('.modal-body p');
+  modalText.innerText = `Título da dica a ser deletada: ${hint.title}`;
+
+  const modalFooter = document.querySelector('.modal-footer');
+  modalFooter.dataset.modal = 'deleteModal';
+  const confirmButton = document.createElement('button');
+  confirmButton.innerText = 'Confirmar operação';
+
+  modalFooter.appendChild(confirmButton);
+
+  confirmButton.onclick = () => {
+    deleteHintFromPage(hint);
+    eraseModal();
+  };
+};
+
+const populateEditModal = hint => {
+  myModal.style.display = 'block';
+  const modalHeader = document.querySelector('.modal-header');
+  modalHeader.dataset.modal = 'editModal';
+
+  const modalTitle = document.querySelector('.modal-header h2');
+  modalTitle.innerText = `Você entrou no modo de edição de dica`;
+  const modalText = document.querySelector('.modal-body p');
+  modalText.innerText = `As informações da dica ${hint.title} foram enviadas ao formulário.\n Após a edição, clique em salvar para confirmar a edição da dica ou em limpar para sair do modo edição`;
+
+  const modalFooter = document.querySelector('.modal-footer');
+  modalFooter.dataset.modal = 'editModal';
+  const confirmButton = document.createElement('button');
+  confirmButton.innerText = 'ok';
+
+  modalFooter.appendChild(confirmButton);
+
+  confirmButton.onclick = () => {
+    eraseModal();
+  };
+};
+
+const populateVideoModal = hint => {
+  console.log(hint);
+
+  myModal.style.display = 'block';
+
+  const modalHeader = document.querySelector('.modal-header');
+  modalHeader.dataset.modal = 'videoModal';
+  const modalTitle = document.querySelector('.modal-header h2');
+  modalTitle.innerText = `Educação continuada - Vídeo Aulas`;
+
+  const modalBody = document.querySelector('.modal-body');
+  const modalText = document.querySelector('.modal-body p');
+  modalText.innerHTML = `Vídeo da dica: ${hint.title}.`;
+
+  const videoError = document.createElement('p');
+  videoError.innerHTML = `Problema na execução do vídeo? Clique <a href=${hint.videoUrl} target="_blank"> aqui</a> para ser direcionado para o youtube`;
+  videoError.classList.add('videoError');
+
+  const iframe = document.createElement('iframe');
+  const formattedUrl = hint.videoUrl.replace('watch?v=', 'embed/');
+
+  iframe.setAttribute('src', formattedUrl);
+
+  modalBody.appendChild(iframe);
+  modalBody.appendChild(videoError);
+};
+
+const deleteHintFromPage = hint => {
+  deleteHint(hint.id);
+
+  const deletedHint = document.querySelector(
+    `[data-id="${hint.id.toString()}"]`
+  );
+  deletedHint.remove();
+
+  updateHintCountByCategory(hint.category, true);
 };
 
 const submitForm = async event => {
@@ -222,15 +318,14 @@ const submitForm = async event => {
   };
 
   if (code) {
-    let confirmUpdate = confirm(
-      `Você está editando a dica com título ${post.title}. Você confirma a edição?`
-    );
+    let confirmUpdate = confirm('confirma a edição?');
 
     if (confirmUpdate) {
       try {
         await updateHint(post);
         updateEditedHint(post);
         getStatistics();
+        populateConfirmModal(post, 'atualizada');
         form.reset();
       } catch (error) {
         console.error(`Não foi possível atualizar a dica! Erro: ${error}`);
@@ -241,7 +336,7 @@ const submitForm = async event => {
       const createdHint = await createHint(post);
       createHintLi(createdHint);
       updateHintCountByCategory(createdHint.category);
-      alert('Dica cadastrada com sucesso!');
+      populateConfirmModal(createdHint, 'cadastrada');
       form.reset();
     } catch (error) {
       console.error(
@@ -302,14 +397,18 @@ form.addEventListener('submit', event => {
   submitForm(event);
 });
 
+modalCloseButton.addEventListener('click', eraseModal);
+
+window.addEventListener('click', event => {
+  if (event.target === myModal) {
+    eraseModal();
+  }
+});
+
 window.addEventListener('load', async () => {
   const hints = await getHints();
 
   populateHints(hints);
 
-  const popoverTriggerList = document.querySelectorAll(
-    '[data-bs-toggle="popover"]'
-  );
-  popoverList(popoverTriggerList);
   getStatistics();
 });
