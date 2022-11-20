@@ -11,6 +11,11 @@ const statisticsDivs = document.querySelectorAll('.statistics div');
 const searchButton = document.querySelector('#search-button');
 const resetSearch = document.querySelector('#search-reset');
 
+const popoverList = popoverList =>
+  [...popoverList].map(
+    popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl)
+  );
+
 const transformCategoryValue = value => {
   let text;
 
@@ -34,11 +39,12 @@ const transformCategoryValue = value => {
 
 const createHintLi = hint => {
   const li = document.createElement('li');
+
   const title = document.createElement('h3');
   const language = document.createElement('h4');
   const category = document.createElement('h4');
   const description = document.createElement('p');
-  //buttons
+
   const buttonsDiv = document.createElement('div');
   const videoButton = document.createElement('a');
   const deleteButton = document.createElement('button');
@@ -56,7 +62,13 @@ const createHintLi = hint => {
   buttonsDiv.classList.add('hint-buttons');
 
   //videoButton
-  videoButton.innerText = 'Vídeo';
+  videoButton.innerHTML =
+    '<i class="fa-solid fa-video fa-2x"></i><span class="tooltiptext">Ver vídeo</span>';
+
+  // videoButton.dataset.bsToggle = 'popover';
+  // videoButton.dataset.bsTitle = 'Youtube Video';
+  // videoButton.dataset.bsContent =
+  //   'And heres some amazing content. Its very engaging. Right?';
   if (hint.videoUrl) {
     videoButton.href = hint.videoUrl;
   } else {
@@ -64,19 +76,24 @@ const createHintLi = hint => {
   }
 
   videoButton.setAttribute('target', '_blank');
+  videoButton.classList.add('tooltip');
 
   //delete Button
-  deleteButton.innerText = 'Deletar';
+  deleteButton.innerHTML =
+    '<i class="fa-solid fa-trash fa-2x"></i><span class="tooltiptext">Deletar dica</span>';
   deleteButton.addEventListener('click', () => deleteHintFromPage(hint));
+  deleteButton.classList.add('tooltip');
 
   //edit Button
-  editButton.innerText = 'Editar';
+  editButton.innerHTML =
+    '<i class="fa-solid fa-pen-to-square fa-2x"></i></i><span class="tooltiptext">Editar dica</span>';
   editButton.addEventListener('click', event => {
     sendHintToFormToEdit(hint);
     alert(
       'As informações da dica selecionada para edição foram enviadas para o formulário. Realize as devidas edições e clique em Salvar para finalizar.'
     );
   });
+  editButton.classList.add('tooltip');
 
   li.appendChild(title);
   li.appendChild(language);
@@ -210,17 +227,27 @@ const submitForm = async event => {
     );
 
     if (confirmUpdate) {
-      await updateHint(post);
-      updateEditedHint(post);
-      getStatistics();
-      form.reset();
+      try {
+        await updateHint(post);
+        updateEditedHint(post);
+        getStatistics();
+        form.reset();
+      } catch (error) {
+        console.error(`Não foi possível atualizar a dica! Erro: ${error}`);
+      }
     }
   } else {
-    const createdHint = await createHint(post);
-    createHintLi(createdHint);
-    updateHintCountByCategory(createdHint.category);
-    alert('Dica cadastrada com sucesso!');
-    form.reset();
+    try {
+      const createdHint = await createHint(post);
+      createHintLi(createdHint);
+      updateHintCountByCategory(createdHint.category);
+      alert('Dica cadastrada com sucesso!');
+      form.reset();
+    } catch (error) {
+      console.error(
+        `Não foi possível adicionar a dica ao banco dados! Erro: ${error}`
+      );
+    }
   }
 };
 
@@ -277,6 +304,12 @@ form.addEventListener('submit', event => {
 
 window.addEventListener('load', async () => {
   const hints = await getHints();
+
   populateHints(hints);
+
+  const popoverTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="popover"]'
+  );
+  popoverList(popoverTriggerList);
   getStatistics();
 });

@@ -5,7 +5,7 @@
       "language": "JavaScript",
       "category": "1",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed purus tellus, eleifend sit amet eleifend quis, dignissim quis ex. Aenean et dolor a sapien tincidunt dictum non non lorem. Etiam enim nisi, lacinia a ipsum quis, sollicitudin varius eros. Quisque scelerisque pharetra facilisis. Nulla mollis varius ligula, et condimentum turpis dapibus et. Aenean est nulla, commodo et est in, blandit euismod velit. Quisque efficitur tortor lectus, at ultrices dui blandit id. Suspendisse mattis rhoncus sem, et eleme",
-      "videoUrl": "",
+      "videoUrl": "https://www.youtube.com/watch?v=7Bs4-rqbCQc",
       "id": 4
     },
     {
@@ -33,12 +33,44 @@
       "id": 7
     },
     {
-      "title": "exemplo22 javascript",
-      "language": "comportamento",
-      "category": "4",
-      "description": "deajedapohdjeandeapoi ha h oiehae oinh oieh apjk ed´pohejad iheaiope ale a",
+      "title": "Angular e Frontend",
+      "language": "angular",
+      "category": "1",
+      "description": "Mussum Ipsum, cacilds vidis litro abertis. Admodum accumsan disputationi eu sit. Vide electram sadipscing et per.Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!Detraxit consequat et quo num tendi nada.Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.\n\nQuem num gosta di mé, boa gentis num é.Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.In elementis mé pra quem é amistosis quis leo.Mauris nec dolor in eros commodo tempor.",
       "videoUrl": "",
-      "id": 8
+      "id": 9
+    },
+    {
+      "title": "Javascript no backend - NodeJS",
+      "language": "NodeJS",
+      "category": "2",
+      "description": "Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis.Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget.Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!",
+      "videoUrl": "https://www.youtube.com/",
+      "id": 10
+    },
+    {
+      "title": "Polimorfismo",
+      "language": "POO",
+      "category": "3",
+      "description": "Significa muitas formas, na orientação a objetos você pode enviar uma mesma mensagem para diferentes objetos e fazê-los responder da maneira correta. Você pode enviar a mensagem para cada objeto semelhante a um veículo e cada um vai se comportar de maneira diferente para atender a sua solicitação.\n",
+      "videoUrl": "https://www.youtube.com/12",
+      "id": 11
+    },
+    {
+      "title": "JavaScript Object Notation (JSON)",
+      "language": "Javascript",
+      "category": "1",
+      "description": "JSON (JavaScript Object Notation), significa a representação baseada em texto, sem schema, baseada em pares de valores-chave e listas ordenadas;\nMuito utilizado para enviar dados do back-end para o front-end, vice-versa;\nFácil de ler e entender os objetos contidos em um arquivo do tipo JSON;\nProcessamento leve e de fácil interpretação;\n",
+      "videoUrl": "https://www.youtube.com/watch?v=UE_mKZGvl88",
+      "id": 12
+    },
+    {
+      "title": "Comunicação Efetiva",
+      "language": "comunicação",
+      "category": "4",
+      "description": "\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidun",
+      "videoUrl": "",
+      "id": 14
     }
   ]
 }
