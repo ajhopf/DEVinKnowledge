@@ -125,6 +125,8 @@ npm install json-server
   "hints": []
 }
 ```
+Desta maneira o seu aplicativo irá inicializar sem nenhuma dica cadastrada. 
+Você pode obtar por copiar [este arquivo](https://github.com/ajhopf/DEVinKnowledge/blob/main/data/db.json), desta forma já o inicializando com algumas dicas cadastradas.
 
 3) Dentro do arquivo `package.json` adicione o seguinte script:
 
