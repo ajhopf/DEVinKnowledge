@@ -140,10 +140,12 @@ Você pode obtar por copiar [este arquivo](https://github.com/ajhopf/DEVinKnowle
 npm start
 ```
 
-O servidor roda a partir da porta 3000:
+O servidor roda a partir da porta 3000 (a aplicação já está configurada para acessar o servidor por esta porta):
 
 ```bash
 http://localhost:3000
 ```
 
 Clique [aqui](https://github.com/typicode/json-server) para mais informações sobre o json-server.
+
+### Você está pronto para utilizar o DEVinKnowledge!
